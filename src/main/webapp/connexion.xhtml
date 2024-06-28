@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+    <title>Connexion</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/primeflex@latest/primeflex.css"/>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .navbar {
+            background-color: #007bff;
+            width: 100%;
+            padding: 20px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .scrolling-text {
+            width: 100%;
+            background-color: #0056b3;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: bold;
+            white-space: nowrap;
+            overflow: hidden;
+            box-sizing: border-box;
+        }
+        .scrolling-text span {
+            display: inline-block;
+            padding-left: 100%;
+            animation: scroll 15s linear infinite;
+        }
+        @keyframes scroll {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-100%, 0); }
+        }
+        .content {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .register-container {
+            width: 400px;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .register-container h2 {
+            margin-bottom: 20px;
+            text-align: center;
+            color: #333;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #555;
+        }
+        .form-group input[type="text"],
+        .form-group input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            box-sizing: border-box;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        .form-group input[type="text"]:focus,
+        .form-group input[type="password"]:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+        .form-group .btn-submit {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+            margin-top: 10px;
+        }
+        .form-group .btn-submit:hover {
+            background-color: #0056b3;
+        }
+        .register-link {
+            display: block;
+            text-align: center;
+            margin-top: 10px;
+            font-size: 14px;
+            color: #007bff;
+            text-decoration: none;
+        }
+        .register-link:hover {
+            text-decoration: underline;
+        }
+        .forgot-password {
+            text-align: center;
+            margin-top: 10px;
+        }
+        .forgot-password a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .forgot-password a:hover {
+            text-decoration: underline;
+        }
+        footer {
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+        footer p {
+            margin: 0;
+        }
+    </style>
+</h:head>
+<h:body>
+    <div class="navbar">
+        <h1 style="color: white; margin: 0;">Bienvenue Dans notre Banque Sa Xaalis</h1>
+    </div>
+    <div class="scrolling-text">
+        <span>Bienvenue sur notre site! Connectez-vous pour accéder à votre compte. Profitez de nos services exclusifs.</span>
+    </div>
+    <div class="content">
+        <div class="register-container">
+            <h2>Connexion</h2>
+            <h:form>
+                <div class="form-group">
+                    <label for="login">Login :</label>
+                    <p:inputText id="login" value="#{userBean.user.login}" styleClass="form-control"/>
+                </div>
+                <div class="form-group">
+                    <label for="motdepasse">Mot de passe :</label>
+                    <p:password id="motdepasse" value="#{userBean.user.password}" styleClass="form-control"/>
+                </div>
+                <div class="form-group">
+                    <p:commandButton value="Se connecter" action="#{userBean.verif}" styleClass="btn-submit"/>
+                </div>
+                <div class="forgot-password">
+                    <a href="#">Mot de passe oublié?</a>
+                </div>
+                <a href="inscription.xhtml" class="register-link">Créer un compte</a>
+            </h:form>
+        </div>
+    </div>
+    <footer>
+        <p>&#169; 2024 Votre Site. Tous droits réservés.</p>
+    </footer>
+</h:body>
+</html>

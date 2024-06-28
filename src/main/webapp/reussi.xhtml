@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+    <title>CompteUtilisateur</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .navbar h1 {
+            margin: 0;
+        }
+        .navbar .middle-text {
+            flex-grow: 1;
+            text-align: center;
+        }
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            background-color: #007bff;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            border-radius: 5px 5px 0 0;
+        }
+        .content {
+            padding: 20px;
+        }
+        .content h3 {
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: block;
+            color: #007bff;
+        }
+        .form-group input[type="text"],
+        .form-group input[type="password"],
+        .form-group .btn-submit {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+        .form-group .btn-submit {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            box-sizing: border-box;
+            font-size: 16px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 10px; /* Ajoute de l'espace en haut */
+            margin-bottom: 10px; /* Ajoute de l'espace en bas */
+            text-align: center; /* Centre le texte */
+        }
+        .form-group .btn-submit:hover {
+            background-color: #0056b3;
+        }
+        hr {
+            border: none;
+            border-top: 1px solid #eee;
+            margin: 20px 0;
+        }
+        .marquee {
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+            animation: marquee 20s linear infinite;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        .footer {
+            background-color: #007bff;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</h:head>
+
+<h:body>
+    <div class="navbar">
+        <h1>Votre Compte Sa Xalis</h1>
+        <div class="middle-text">
+            <p>Protégez votre compte : Ne partagez jamais vos informations de connexion.</p>
+        </div>
+        <div class="user-info">
+            <p> En cas de doute, contactez notre service clientèle immédiatement.</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <h2>Votre comptabilité entre de bonnes mains avec nous </h2>
+        </div>
+        <div class="content"  style="text-align: center;">
+            <h3>Informations Personnelles</h3>
+            <h:form>
+                <p:dataTable var="product" value="#{userBean.compteUtilisateurs}">
+                    <p:column headerText="Numero de compte">
+                        <h:outputText value="#{product.compte.numero}" />
+                    </p:column>
+                    <p:column headerText="votre Prenom">
+                        <h:outputText value="#{product.utilisateur.prenom}" />
+                    </p:column>
+                    <p:column headerText="votre Nom">
+                        <h:outputText value="#{product.utilisateur.nom}" />
+                    </p:column>
+                    <p:column headerText="votre Login">
+                        <h:outputText value="#{product.utilisateur.login}" />
+                    </p:column>
+                </p:dataTable>
+            </h:form>  
+            <h:form>
+                <p:commandButton value="Déposer" type="button" onclick="PF('dlg1').show()" class="btn-submit" />
+                  <span style="margin: 0 10px;"></span>
+                <p:commandButton value="Retirer" type="button" onclick="PF('dlg2').show()" class="btn-submit"/>
+                  <span style="margin: 0 10px;"></span>
+                <p:commandButton value="Consulter" type="button" onclick="PF('dlg3').show()" class="btn-submit"/>
+                
+            </h:form> 
+        </div>
+    </div>
+    <p:dialog header="Déposer" widgetVar="dlg1" minHeight="50" width="450" showEffect="fade" closeOnEscape="true" position="center" appendTo="@(body)">
+        <h:form id="depositForm">
+            <p:panel header="Dépôt" style="width: 400px;margin:  150px auto 0;">
+                <p:messages/>
+                <h:panelGrid columns="2">   
+                    <p:outputLabel value="Saisir montant dépôt"/>
+                    <p:inputText value="#{userBean.somme}"/>
+                    <p:commandButton value="Soumettre" action="#{userBean.depot}" oncomplete="PF('dlg1').hide()" update="depositForm"/>
+                </h:panelGrid> 
+            </p:panel>
+        </h:form>
+    </p:dialog>
+
+    <p:dialog header="Retirer" widgetVar="dlg2" minHeight="50" width="450" showEffect="fade" closeOnEscape="true" position="center" appendTo="@(body)">
+        <h:form id="withdrawForm">
+            <p:panel header="Retrait" style="width: 400px;margin:  150px auto 0;">
+                <p:messages/>
+                <h:panelGrid columns="2">   
+                    <p:outputLabel value="Saisir montant retrait"/>
+                    <p:inputText value="#{userBean.somme}"/>
+                    <p:commandButton value="Soumettre" action="#{userBean.retrait}" oncomplete="PF('dlg2').hide()" update="withdrawForm"/>
+                </h:panelGrid>
+            </p:panel>
+        </h:form>
+    </p:dialog>
+
+    <p:dialog header="Consulter Solde" widgetVar="dlg3" minHeight="50" width="450" showEffect="fade" closeOnEscape="true" position="center" appendTo="@(body)">
+        <h:form id="checkBalanceForm">
+            <p:panel header="Consulter Solde" style="width: 400px;margin:  150px auto 0;">
+                <p:messages/>
+                <h:panelGrid columns="2">   
+                    <p:outputLabel value="Saisir numéro de compte"/>
+                    <p:inputText value="#{userBean.somme}"/>
+                    <p:commandButton value="Soumettre" action="#{userBean.consulter}" oncomplete="PF('dlg3').hide()" update="checkBalanceForm"/>
+                </h:panelGrid>
+            </p:panel>
+        </h:form>
+    </p:dialog>
+    <div class="footer">
+        <div class="marquee">
+            <span>Protégez votre compte : Ne partagez jamais vos informations de connexion avec qui que ce soit.</span>
+        </div>
+    </div>
+</h:body>
+</html>
+   

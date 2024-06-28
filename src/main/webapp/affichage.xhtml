@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+    <title>Person List</title>
+    <style>
+        .card {
+            padding: 20px;
+            margin: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .link-return {
+            margin-top: 20px;
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .link-return:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</h:head>
+<h:body>
+     <h:form>
+        <div class="card">
+            <p:dataTable var="product" value="#{userBean.compte}">
+                <p:column headerText="Solde">
+                    <h:outputText value="#{product.solde} Franc" />
+                </p:column>
+            </p:dataTable>
+        </div>
+        <h:commandLink value="Retour" action="#{userBean.goToReussi}" class="link-return"/>
+    </h:form>  
+</h:body>
+</html>

@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 8 mai 2024, 18:53:53 by Hibernate Tools 4.3.6.Final -->
+<hibernate-mapping>
+    <class name="dao.Compte" table="compte" schema="public" optimistic-lock="version">
+        <id name="numero" type="int">
+            <column name="numero" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="utilisateur" class="dao.Utilisateur" fetch="select">
+            <column name="iduser" />
+        </many-to-one>
+        <property name="solde" type="java.lang.Integer">
+            <column name="solde" />
+        </property>
+        <property name="datecreation" type="string">
+            <column name="datecreation" length="254" />
+        </property>
+        <set name="operations" table="operation" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="numero" />
+            </key>
+            <one-to-many class="dao.Operation" />
+        </set>
+    </class>
+</hibernate-mapping>

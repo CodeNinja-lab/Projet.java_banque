@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 8 mai 2024, 18:53:53 by Hibernate Tools 4.3.6.Final -->
+<hibernate-mapping>
+    <class name="dao.Operation" table="operation" schema="public" optimistic-lock="version">
+        <id name="idoperation" type="int">
+            <column name="idoperation" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="compte" class="dao.Compte" fetch="select">
+            <column name="numero" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>
